@@ -1,0 +1,29 @@
+{
+  "name": "summery",
+  "version": "0.0.1",
+  "description": "Summery is a WebApp tool for economics summary, graphs and automatic calculations",
+  "main": "lib/server/server.js",
+  "scripts": {
+    "test": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoniogiordano/summery.git"
+  },
+  "keywords": [
+    "summary",
+    "economy",
+    "calculations",
+    "automatic",
+    "balance"
+  ],
+  "author": "antoniogiordano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antoniogiordano/summery/issues"
+  },
+  "homepage": "https://github.com/antoniogiordano/summery#readme",
+  "devDependencies": {
+    "standard": "^8.6.0"
+  }
+}
