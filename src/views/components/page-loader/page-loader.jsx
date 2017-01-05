@@ -2,11 +2,8 @@
  * Created by AntonioGiordano on 13/09/16.
  */
 
-const React = require('react')
+import React from 'react'
 
-/*
-  @TODO: Fading sul visible = false
- */
 const PageLoader = React.createClass({
   propTypes: {
     css: React.PropTypes.object,
@@ -22,10 +19,11 @@ const PageLoader = React.createClass({
     return (
       <div>
         {
-          this.props.visible ?
-            <div className={this.props.css.root}>
+          this.props.visible
+            ? <div className={this.props.css.root}>
               <img alt='' src='/img/loader.gif' />
-            </div> : null
+            </div>
+            : null
         }
       </div>
     )

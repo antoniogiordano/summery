@@ -80,8 +80,8 @@ const InputText = React.createClass({
         }
         <div className={this.getCss('inputContainer')}>
           {
-            this.props.inputName !== null ?
-              <input
+            this.props.inputName !== null
+              ? <input
                 onChange={this.onInputChange}
                 type={this.props.inputType}
                 name={this.props.inputName}

@@ -55,7 +55,7 @@ const Registration = React.createClass({
   componentDidMount () {
     isLogged((err, response) => {
       if (err) {
-        alert(err.message)
+        swal(err.message)
         this.setState({
           isPageLoading: false
         })
@@ -65,7 +65,7 @@ const Registration = React.createClass({
             isPageLoading: false
           })
         } else {
-          location.href = '/'
+          window.location.href = '/'
         }
       }
     })
@@ -109,7 +109,7 @@ const Registration = React.createClass({
         })
       }
 
-      if (data.result === 1) return location.href = '/login'
+      if (data.result === 1) window.location.href = '/login'
     })
   },
   render () {

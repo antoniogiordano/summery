@@ -4,17 +4,17 @@
 
 import axios from 'axios'
 
-const handleAJAXError = (err, cb) => {
+/* const handleAJAXError = (err, cb) => {
   switch (err.status) {
     case 401:
-      location.href = '/login'
+      window.location.href = '/login'
       break
     default:
       alert(err.message)
       cb(err)
       break
   }
-}
+} */
 
 module.exports = {
   registration: (data, cb) => {

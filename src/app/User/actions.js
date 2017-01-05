@@ -9,8 +9,6 @@ import User from './user.js'
 import {registrationValidation} from './shared.js'
 
 const isLogged = (req, reply) => {
-  const log = req.server.plugins['hapi-log'].log
-
   if (req.auth.isAuthenticated) {
     return reply({
       result: 1
@@ -91,5 +89,5 @@ module.exports = [
     config: {
       handler: registrate
     }
-  },
+  }
 ]

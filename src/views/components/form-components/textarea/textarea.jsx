@@ -69,20 +69,20 @@ const Textarea = React.createClass({
         }
         <div className={css.inputContainer}>
           {
-            this.props.inputName !== null ?
-              <div
+            this.props.inputName !== null
+              ? <div
                 contentEditable
                 onInput={this.onInputChange}
                 name={this.props.inputName}
                 rows={this.props.rows}
                 className={css.textarea + ' ' + this.getOutputClass(css)}
-              /> :
-                <div
-                  contentEditable
-                  onInput={this.onInputChange}
-                  rows={this.props.rows}
-                  className={css.textarea + ' ' + this.getOutputClass(css)}
-              />
+                />
+              : <div
+                contentEditable
+                onInput={this.onInputChange}
+                rows={this.props.rows}
+                className={css.textarea + ' ' + this.getOutputClass(css)}
+                />
           }
           <output className={this.getOutputClass(css)}>
             {

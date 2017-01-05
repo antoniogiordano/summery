@@ -284,7 +284,7 @@ webpackJsonp([1],[
 
 	    (0, _ajaxRequests.isLogged)(function (err, response) {
 	      if (err) {
-	        alert(err.message);
+	        (0, _sweetalert2.default)(err.message);
 	        _this.setState({
 	          isPageLoading: false
 	        });
@@ -294,7 +294,7 @@ webpackJsonp([1],[
 	            isPageLoading: false
 	          });
 	        } else {
-	          location.href = '/';
+	          window.location.href = '/';
 	        }
 	      }
 	    });
@@ -340,7 +340,7 @@ webpackJsonp([1],[
 	        });
 	      }
 
-	      if (data.result === 1) return location.href = '/login';
+	      if (data.result === 1) window.location.href = '/login';
 	    });
 	  },
 	  render: function render() {
@@ -14802,21 +14802,18 @@ webpackJsonp([1],[
 
 	'use strict';
 
-	/**
-	 * Created by AntonioGiordano on 13/09/16.
-	 */
+	var _react = __webpack_require__(1);
 
-	var React = __webpack_require__(1);
+	var _react2 = _interopRequireDefault(_react);
 
-	/*
-	  @TODO: Fading sul visible = false
-	 */
-	var PageLoader = React.createClass({
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PageLoader = _react2.default.createClass({
 	  displayName: 'PageLoader',
 
 	  propTypes: {
-	    css: React.PropTypes.object,
-	    visible: React.PropTypes.bool
+	    css: _react2.default.PropTypes.object,
+	    visible: _react2.default.PropTypes.bool
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -14825,17 +14822,19 @@ webpackJsonp([1],[
 	    };
 	  },
 	  render: function render() {
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      this.props.visible ? React.createElement(
+	      this.props.visible ? _react2.default.createElement(
 	        'div',
 	        { className: this.props.css.root },
-	        React.createElement('img', { alt: '', src: '/img/loader.gif' })
+	        _react2.default.createElement('img', { alt: '', src: '/img/loader.gif' })
 	      ) : null
 	    );
 	  }
-	});
+	}); /**
+	     * Created by AntonioGiordano on 13/09/16.
+	     */
 
 	module.exports = PageLoader;
 
@@ -14905,19 +14904,17 @@ webpackJsonp([1],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var handleAJAXError = function handleAJAXError(err, cb) {
+	/* const handleAJAXError = (err, cb) => {
 	  switch (err.status) {
 	    case 401:
-	      location.href = '/login';
-	      break;
+	      window.location.href = '/login'
+	      break
 	    default:
-	      alert(err.message);
-	      cb(err);
-	      break;
+	      alert(err.message)
+	      cb(err)
+	      break
 	  }
-	}; /**
-	    * Created by AntonioGiordano on 07/10/16.
-	    */
+	} */
 
 	module.exports = {
 	  registration: function registration(data, cb) {
@@ -14956,7 +14953,9 @@ webpackJsonp([1],[
 	      cb(err);
 	    });
 	  }
-	};
+	}; /**
+	    * Created by AntonioGiordano on 07/10/16.
+	    */
 
 /***/ },
 /* 201 */
