@@ -191,7 +191,7 @@
     -ms-box-shadow: none;
     -o-box-shadow: none;
     box-shadow: none; }
-.registration__root___2I5c6 {
+.login__root___2WK45 {
   background: #006e60;
   background-position: center;
   background-size: 100% 100%;
@@ -200,11 +200,11 @@
   min-height: 100%;
   min-height: 100vh; }
 
-.registration__logo___K-ILn {
+.login__logo___1OrM0 {
   width: 350px;
   height: auto; }
 
-.registration__pageContent___2Xu6m {
+.login__pageContent___1br8M {
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -234,7 +234,7 @@
   -o-align-items: center;
   align-items: center; }
 
-.registration__formContainer___1zm21 {
+.login__formContainer___1LgFz {
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;
@@ -260,14 +260,14 @@
   align-items: center;
   width: 300px; }
 
-.registration__inputCont___3krvN {
+.login__inputCont___2iSYM {
   width: 100%;
   margin-bottom: 20px; }
 
 /******
     INPUT TEXT OVERRIDE CSS
 */
-.registration__inputTextRoot___nlpRQ .registration__inputContainer___2yItM input {
+.login__inputTextRoot___2hG3v .login__inputContainer___2JLUm input {
   width: 100%;
   border: none;
   background: rgba(255, 255, 255, 0);
@@ -275,22 +275,23 @@
   color: white;
   border-bottom: 1px solid white; }
 
-.registration__inputTextRoot___nlpRQ label {
+.login__inputTextRoot___2hG3v label {
   color: rgba(255, 255, 255, 0.8); }
 
-.registration__inputTextRoot___nlpRQ summary {
+.login__inputTextRoot___2hG3v summary {
   color: white; }
 
-.registration__inputTextRoot___nlpRQ dialog {
+.login__inputTextRoot___2hG3v dialog {
   background: transparent; }
 
 /******
     SIGNUP BUTTON OVERRIDE CSS
 */
-.registration__signupButtonRoot___3cwVu {
+.login__signupButtonRoot___2AAzJ {
   background: #ecd163;
   color: white;
-  width: 100%; }
-  .registration__signupButtonRoot___3cwVu:hover {
+  width: 100%;
+  margin-bottom: 10px; }
+  .login__signupButtonRoot___2AAzJ:hover {
     background: #ecd163;
     color: white; }

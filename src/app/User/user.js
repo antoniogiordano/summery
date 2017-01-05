@@ -20,22 +20,23 @@ class User {
     }
   }
 
-  existByField (field, value, db, cb) {
+  getByField (field, value, db, cb) {
     var filter = {}
     filter[field] = value
-    DAO.findOne(db, 'users', filter, (err, ubiatar) => {
+    DAO.findOne(db, 'users', filter, (err, user) => {
       if (err) return cb(err)
 
-      return cb(null, ubiatar !== null)
+      this.init(user)
+      return cb(null, user !== null)
     })
   }
 
   getFromId (_id, db, cb) {
-    DAO.findOne(db, 'users', {_id: _id}, (err, ubiatar) => {
+    DAO.findOne(db, 'users', {_id: _id}, (err, user) => {
       if (err) return cb(err)
 
-      if (ubiatar !== null) {
-        this.init(ubiatar)
+      if (user !== null) {
+        this.init(user)
         cb(null, true)
       } else {
         cb(null, false)

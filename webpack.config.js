@@ -9,7 +9,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = [{
   entry: {
     common: ['react', 'react-dom'],
-    'user.registration': './lib/views/Users/registration/injector.js'
+    'user.registration': './lib/views/Users/registration/injector.js',
+    'user.login': './lib/views/Users/login/injector.js',
+    'user.dashboard': './lib/views/Users/dashboard/injector.js'
   },
   output: {
     path: path.join(__dirname, 'public', 'js', 'bundles'),

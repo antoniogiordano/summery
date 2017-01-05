@@ -191,7 +191,7 @@
     -ms-box-shadow: none;
     -o-box-shadow: none;
     box-shadow: none; }
-.registration__root___2I5c6 {
+.dashboard__root___PaJJS {
   background: #006e60;
   background-position: center;
   background-size: 100% 100%;
@@ -199,98 +199,68 @@
   width: 100%;
   min-height: 100%;
   min-height: 100vh; }
-
-.registration__logo___K-ILn {
-  width: 350px;
-  height: auto; }
-
-.registration__pageContent___2Xu6m {
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  display: -webkit-box;
-  /* OLD - iOS 6-, Safari 3.1-6 */
-  display: -moz-box;
-  /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;
-  /* TWEENER - IE 10 */
-  display: -webkit-flex;
-  /* NEW - Chrome */
-  display: flex;
-  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
-  -o-flex-direction: column;
-  flex-direction: column;
-  -webkit-justify-content: space-around;
-  -moz-justify-content: space-around;
-  -ms-justify-content: space-around;
-  -o-justify-content: space-around;
-  justify-content: space-around;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  -o-align-items: center;
-  align-items: center; }
-
-.registration__formContainer___1zm21 {
-  display: -webkit-box;
-  /* OLD - iOS 6-, Safari 3.1-6 */
-  display: -moz-box;
-  /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;
-  /* TWEENER - IE 10 */
-  display: -webkit-flex;
-  /* NEW - Chrome */
-  display: flex;
-  /* NEW, Spec - Opera 12.1, Firefox 20+ */
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
-  -o-flex-direction: column;
-  flex-direction: column;
-  height: auto;
-  width: 100%;
-  justify-content: space-around;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  -o-align-items: center;
-  align-items: center;
-  width: 300px; }
-
-.registration__inputCont___3krvN {
-  width: 100%;
-  margin-bottom: 20px; }
-
-/******
-    INPUT TEXT OVERRIDE CSS
-*/
-.registration__inputTextRoot___nlpRQ .registration__inputContainer___2yItM input {
-  width: 100%;
-  border: none;
-  background: rgba(255, 255, 255, 0);
-  font-size: 16px;
-  color: white;
-  border-bottom: 1px solid white; }
-
-.registration__inputTextRoot___nlpRQ label {
-  color: rgba(255, 255, 255, 0.8); }
-
-.registration__inputTextRoot___nlpRQ summary {
-  color: white; }
-
-.registration__inputTextRoot___nlpRQ dialog {
-  background: transparent; }
-
-/******
-    SIGNUP BUTTON OVERRIDE CSS
-*/
-.registration__signupButtonRoot___3cwVu {
-  background: #ecd163;
-  color: white;
-  width: 100%; }
-  .registration__signupButtonRoot___3cwVu:hover {
-    background: #ecd163;
-    color: white; }
+  .dashboard__root___PaJJS .dashboard__page___2jGU2 {
+    width: 100%;
+    min-height: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: flex-start;
+    -moz-justify-content: flex-start;
+    -ms-justify-content: flex-start;
+    -o-justify-content: flex-start;
+    justify-content: flex-start;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center; }
+    .dashboard__root___PaJJS .dashboard__page___2jGU2 .dashboard__headerContainer___ooB8d {
+      width: 100%;
+      height: 60px;
+      background: #00554a; }
+    .dashboard__root___PaJJS .dashboard__page___2jGU2 .dashboard__pageBody___12DZT {
+      display: -webkit-box;
+      /* OLD - iOS 6-, Safari 3.1-6 */
+      display: -moz-box;
+      /* OLD - Firefox 19- (buggy but mostly works) */
+      display: -ms-flexbox;
+      /* TWEENER - IE 10 */
+      display: -webkit-flex;
+      /* NEW - Chrome */
+      display: flex;
+      /* NEW, Spec - Opera 12.1, Firefox 20+ */
+      -webkit-justify-content: flex-start;
+      -moz-justify-content: flex-start;
+      -ms-justify-content: flex-start;
+      -o-justify-content: flex-start;
+      justify-content: flex-start;
+      width: 100%;
+      min-height: calc(100vh - 60px); }
+      .dashboard__root___PaJJS .dashboard__page___2jGU2 .dashboard__pageBody___12DZT .dashboard__sideMenu___30YMv {
+        width: 200px;
+        min-height: calc(100vh - 60px);
+        background: #005f53; }
+        .dashboard__root___PaJJS .dashboard__page___2jGU2 .dashboard__pageBody___12DZT .dashboard__sideMenu___30YMv ul li {
+          padding: 15px 10px;
+          border-bottom: 1px solid #00554a;
+          color: #ecd163;
+          cursor: pointer;
+          text-transform: uppercase; }
+          .dashboard__root___PaJJS .dashboard__page___2jGU2 .dashboard__pageBody___12DZT .dashboard__sideMenu___30YMv ul li:hover {
+            color: #005f53;
+            background: #ecd163;
+            border-bottom: 1px solid #e9ca4c; }

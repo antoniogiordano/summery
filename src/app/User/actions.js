@@ -6,7 +6,7 @@ import Joi from 'joi'
 import Boom from 'boom'
 import Bcrypt from 'bcrypt'
 import User from './user.js'
-import {registrationValidation} from './shared.js'
+import {loginValidation, registrationValidation} from './shared.js'
 
 const isLogged = (req, reply) => {
   if (req.auth.isAuthenticated) {
@@ -27,11 +27,11 @@ const registrate = (req, reply) => {
 
     var user = new User()
     var db = req.server.plugins['hapi-mongodb'].db
-    user.existByField('username', userData.username, db, (err, exists) => {
+    user.getByField('username', userData.username, db, (err, exists) => {
       if (err) return reply(Boom.badImplementation(err.message))
       if (exists) return reply(Boom.badRequest('This username is already taken'))
 
-      user.existByField('email', userData.email, db, (err, exists) => {
+      user.getByField('email', userData.email, db, (err, exists) => {
         if (err) return reply(Boom.badImplementation(err.message))
         if (exists) return reply(Boom.badRequest('This email is already taken'))
 
@@ -56,6 +56,30 @@ const registrate = (req, reply) => {
   })
 }
 
+const login = (req, reply) => {
+  Joi.validate(req.payload, loginValidation, (err, credentials) => {
+    if (err) return reply(Boom.badRequest(err.details[0].message))
+
+    var db = req.server.plugins['hapi-mongodb'].db
+    var user = new User()
+    user.getByField('username', credentials.username, db, (err, exists) => {
+      if (err) return reply(Boom.badImplementation(err.message))
+      if (!exists) return reply(Boom.badData('Account not found!'))
+
+      Bcrypt.compare(credentials.password, user.password, (err, isValid) => {
+        if (err) return reply(Boom.badImplementation(err.message))
+        if (!isValid) return reply(Boom.badData('Wrong credentials!'))
+
+        req.auth.redis.set(user).then(() => {
+          reply({result: 1})
+        }).catch((err) => {
+          return reply(Boom.badImplementation(err.message))
+        })
+      })
+    })
+  })
+}
+
 module.exports = [
   // user SIGNUP PAGE
   {
@@ -65,6 +89,32 @@ module.exports = [
       handler: (req, reply) => {
         var props = {}
         reply.view('Users/registration/registration.ejs', {
+          props: JSON.stringify(props)
+        })
+      }
+    }
+  },
+  // user SIGNIN PAGE
+  {
+    method: 'GET',
+    path: '/signin',
+    config: {
+      handler: (req, reply) => {
+        var props = {}
+        reply.view('Users/login/login.ejs', {
+          props: JSON.stringify(props)
+        })
+      }
+    }
+  },
+  // user DASHBOARD PAGE
+  {
+    method: 'GET',
+    path: '/dashboard',
+    config: {
+      handler: (req, reply) => {
+        var props = {}
+        reply.view('Users/dashboard/dashboard.ejs', {
           props: JSON.stringify(props)
         })
       }
@@ -88,6 +138,14 @@ module.exports = [
     path: '/registrate.json',
     config: {
       handler: registrate
+    }
+  },
+  // user LOGIN ACTION
+  {
+    method: 'POST',
+    path: '/login.json',
+    config: {
+      handler: login
     }
   }
 ]

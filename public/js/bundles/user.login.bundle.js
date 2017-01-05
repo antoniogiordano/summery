@@ -1,4 +1,4 @@
-webpackJsonp([3],[
+webpackJsonp([2],[
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -12,15 +12,15 @@ webpackJsonp([3],[
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _registration = __webpack_require__(230);
+	var _login = __webpack_require__(222);
 
-	var _registration2 = _interopRequireDefault(_registration);
+	var _login2 = _interopRequireDefault(_login);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_registration2.default, null), document.getElementById('main-content-wrapper')); /**
-	                                                                                                                                          * Created by AntonioGiordano on 23/06/16.
-	                                                                                                                                          */
+	_reactDom2.default.render(_react2.default.createElement(_login2.default, null), document.getElementById('main-content-wrapper')); /**
+	                                                                                                                                   * Created by AntonioGiordano on 23/06/16.
+	                                                                                                                                   */
 
 /***/ },
 /* 1 */,
@@ -3315,7 +3315,213 @@ webpackJsonp([3],[
 
 /***/ },
 /* 221 */,
-/* 222 */,
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _sweetalert = __webpack_require__(179);
+
+	var _sweetalert2 = _interopRequireDefault(_sweetalert);
+
+	var _joi = __webpack_require__(223);
+
+	var _joi2 = _interopRequireDefault(_joi);
+
+	var _inputText = __webpack_require__(188);
+
+	var _inputText2 = _interopRequireDefault(_inputText);
+
+	var _pageLoader = __webpack_require__(191);
+
+	var _pageLoader2 = _interopRequireDefault(_pageLoader);
+
+	var _button = __webpack_require__(193);
+
+	var _button2 = _interopRequireDefault(_button);
+
+	var _ajaxRequests = __webpack_require__(195);
+
+	var _misc = __webpack_require__(189);
+
+	var _shared = __webpack_require__(228);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Login = _react2.default.createClass({
+	  displayName: 'Login',
+
+	  propTypes: {
+	    css: _react2.default.PropTypes.object,
+	    lang: _react2.default.PropTypes.string
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      css: __webpack_require__(229),
+	      lang: 'en_US'
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      isPageLoading: true,
+	      validations: {
+	        username: {
+	          status: _misc.FORM_INPUT_STATES.neutral,
+	          msgError: null
+	        },
+	        password: {
+	          status: _misc.FORM_INPUT_STATES.neutral,
+	          msgError: null
+	        }
+	      },
+	      user: {
+	        username: '',
+	        password: ''
+	      }
+	    };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+
+	    (0, _ajaxRequests.isLogged)(function (err, response) {
+	      if (err) {
+	        (0, _sweetalert2.default)(err.message);
+	        _this.setState({
+	          isPageLoading: false
+	        });
+	      } else {
+	        if (response.result === 0) {
+	          _this.setState({
+	            isPageLoading: false
+	          });
+	        } else {
+	          window.location.href = '/';
+	        }
+	      }
+	    });
+	  },
+	  onInputChange: function onInputChange(fieldId, value) {
+	    var _this2 = this;
+
+	    var user = this.state.user;
+	    user[fieldId] = value;
+	    _joi2.default.validate(user, _shared.loginValidation, { abortEarly: false }, function (err, data) {
+	      var validations = _this2.state.validations;
+	      for (var v in validations) {
+	        validations[v].status = _misc.FORM_INPUT_STATES.success;
+	        validations[v].msgError = null;
+	      }
+	      if (err) {
+	        err.details.map(function (item) {
+	          if (user[item.path].toString().length === 0) {
+	            validations[item.path] = {
+	              status: _misc.FORM_INPUT_STATES.neutral,
+	              msgError: null
+	            };
+	          } else {
+	            validations[item.path] = {
+	              status: _misc.FORM_INPUT_STATES.error,
+	              msgError: item.message
+	            };
+	          }
+	        });
+	      }
+	      _this2.setState({
+	        validations: validations
+	      });
+	    });
+	  },
+	  onSubmitForm: function onSubmitForm() {
+	    (0, _ajaxRequests.login)(this.state.user, function (err, data) {
+	      if (err) {
+	        return (0, _sweetalert2.default)({
+	          type: 'error',
+	          title: 'Error',
+	          text: err.message
+	        });
+	      }
+
+	      if (data.result === 1) window.location.href = '/dashboard';
+	    });
+	  },
+	  render: function render() {
+	    var css = this.props.css;
+	    return _react2.default.createElement(
+	      'div',
+	      { className: this.props.css.root },
+	      _react2.default.createElement(_pageLoader2.default, { visible: this.state.isPageLoading }),
+	      _react2.default.createElement(
+	        'div',
+	        { className: this.props.css.pageContent },
+	        _react2.default.createElement(
+	          'div',
+	          { className: this.props.css.formContainer },
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.props.css.inputCont },
+	            _react2.default.createElement(_inputText2.default, {
+	              summary: 'Username *',
+	              label: 'Username *',
+	              fieldId: 'username',
+	              defaultValue: this.state.user.username,
+	              msgError: this.state.validations.username.msgError,
+	              status: this.state.validations.username.status,
+	              onChange: this.onInputChange,
+	              css: css,
+	              cssRootClass: css.inputTextRoot
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.props.css.inputCont },
+	            _react2.default.createElement(_inputText2.default, {
+	              summary: 'Password *',
+	              label: 'Password *',
+	              fieldId: 'password',
+	              inputType: 'password',
+	              defaultValue: this.state.user.password,
+	              msgError: this.state.validations.password.msgError,
+	              status: this.state.validations.password.status,
+	              onChange: this.onInputChange,
+	              css: css,
+	              cssRootClass: css.inputTextRoot
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.props.css.buttonContainer },
+	            _react2.default.createElement(
+	              _button2.default,
+	              { cssRootClass: css.signupButtonRoot, onClick: this.onSubmitForm },
+	              'Sign in'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.props.css.buttonContainer },
+	            _react2.default.createElement(
+	              _button2.default,
+	              { cssRootClass: css.signupButtonRoot, onClick: function onClick() {
+	                  window.location.href = '/signup';
+	                } },
+	              'Sign up'
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	}); /**
+	     * Created by AntonioGiordano on 19/07/16.
+	     */
+
+	module.exports = Login;
+
+/***/ },
 /* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -16237,249 +16443,11 @@ webpackJsonp([3],[
 	});
 
 /***/ },
-/* 229 */,
-/* 230 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _sweetalert = __webpack_require__(179);
-
-	var _sweetalert2 = _interopRequireDefault(_sweetalert);
-
-	var _joi = __webpack_require__(223);
-
-	var _joi2 = _interopRequireDefault(_joi);
-
-	var _inputText = __webpack_require__(188);
-
-	var _inputText2 = _interopRequireDefault(_inputText);
-
-	var _pageLoader = __webpack_require__(191);
-
-	var _pageLoader2 = _interopRequireDefault(_pageLoader);
-
-	var _button = __webpack_require__(193);
-
-	var _button2 = _interopRequireDefault(_button);
-
-	var _ajaxRequests = __webpack_require__(195);
-
-	var _misc = __webpack_require__(189);
-
-	var _shared = __webpack_require__(228);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Registration = _react2.default.createClass({
-	  displayName: 'Registration',
-
-	  propTypes: {
-	    css: _react2.default.PropTypes.object,
-	    lang: _react2.default.PropTypes.string
-	  },
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      css: __webpack_require__(231),
-	      lang: 'en_US'
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      isPageLoading: true,
-	      validations: {
-	        username: {
-	          status: _misc.FORM_INPUT_STATES.neutral,
-	          msgError: null
-	        },
-	        email: {
-	          status: _misc.FORM_INPUT_STATES.neutral,
-	          msgError: null
-	        },
-	        password: {
-	          status: _misc.FORM_INPUT_STATES.neutral,
-	          msgError: null
-	        },
-	        confirmPassword: {
-	          status: _misc.FORM_INPUT_STATES.neutral,
-	          msgError: null
-	        }
-	      },
-	      newUser: {
-	        username: '',
-	        email: '',
-	        password: '',
-	        confirmPassword: ''
-	      }
-	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    var _this = this;
-
-	    (0, _ajaxRequests.isLogged)(function (err, response) {
-	      if (err) {
-	        (0, _sweetalert2.default)(err.message);
-	        _this.setState({
-	          isPageLoading: false
-	        });
-	      } else {
-	        if (response.result === 0) {
-	          _this.setState({
-	            isPageLoading: false
-	          });
-	        } else {
-	          window.location.href = '/';
-	        }
-	      }
-	    });
-	  },
-	  onInputChange: function onInputChange(fieldId, value) {
-	    var _this2 = this;
-
-	    var newUser = this.state.newUser;
-	    newUser[fieldId] = value;
-	    _joi2.default.validate(newUser, _shared.registrationValidation, { abortEarly: false }, function (err, data) {
-	      var validations = _this2.state.validations;
-	      for (var v in validations) {
-	        validations[v].status = _misc.FORM_INPUT_STATES.success;
-	        validations[v].msgError = null;
-	      }
-	      if (err) {
-	        err.details.map(function (item) {
-	          if (newUser[item.path].toString().length === 0) {
-	            validations[item.path] = {
-	              status: _misc.FORM_INPUT_STATES.neutral,
-	              msgError: null
-	            };
-	          } else {
-	            validations[item.path] = {
-	              status: _misc.FORM_INPUT_STATES.error,
-	              msgError: item.message
-	            };
-	          }
-	        });
-	      }
-	      _this2.setState({
-	        validations: validations
-	      });
-	    });
-	  },
-	  onSubmitForm: function onSubmitForm() {
-	    (0, _ajaxRequests.registration)(this.state.newUser, function (err, data) {
-	      if (err) {
-	        return (0, _sweetalert2.default)({
-	          type: 'error',
-	          title: 'Error',
-	          text: err.message
-	        });
-	      }
-
-	      if (data.result === 1) window.location.href = '/login';
-	    });
-	  },
-	  render: function render() {
-	    var css = this.props.css;
-	    return _react2.default.createElement(
-	      'div',
-	      { className: this.props.css.root },
-	      _react2.default.createElement(_pageLoader2.default, { visible: this.state.isPageLoading }),
-	      _react2.default.createElement(
-	        'div',
-	        { className: this.props.css.pageContent },
-	        _react2.default.createElement(
-	          'div',
-	          { className: this.props.css.formContainer },
-	          _react2.default.createElement(
-	            'div',
-	            { className: this.props.css.inputCont },
-	            _react2.default.createElement(_inputText2.default, {
-	              summary: 'Username *',
-	              label: 'Username *',
-	              fieldId: 'username',
-	              defaultValue: this.state.newUser.username,
-	              msgError: this.state.validations.username.msgError,
-	              status: this.state.validations.username.status,
-	              onChange: this.onInputChange,
-	              css: css,
-	              cssRootClass: css.inputTextRoot
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: this.props.css.inputCont },
-	            _react2.default.createElement(_inputText2.default, {
-	              summary: 'Email *',
-	              label: 'Email *',
-	              fieldId: 'email',
-	              defaultValue: this.state.newUser.email,
-	              msgError: this.state.validations.email.msgError,
-	              status: this.state.validations.email.status,
-	              onChange: this.onInputChange,
-	              css: css,
-	              cssRootClass: css.inputTextRoot
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: this.props.css.inputCont },
-	            _react2.default.createElement(_inputText2.default, {
-	              summary: 'Password *',
-	              label: 'Password *',
-	              fieldId: 'password',
-	              inputType: 'password',
-	              defaultValue: this.state.newUser.password,
-	              msgError: this.state.validations.password.msgError,
-	              status: this.state.validations.password.status,
-	              onChange: this.onInputChange,
-	              css: css,
-	              cssRootClass: css.inputTextRoot
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: this.props.css.inputCont },
-	            _react2.default.createElement(_inputText2.default, {
-	              summary: 'Confirm Password *',
-	              label: 'Confirm Password *',
-	              fieldId: 'confirmPassword',
-	              inputType: 'password',
-	              defaultValue: this.state.newUser.confirmPassword,
-	              msgError: this.state.validations.confirmPassword.msgError,
-	              status: this.state.validations.confirmPassword.status,
-	              onChange: this.onInputChange,
-	              css: css,
-	              cssRootClass: css.inputTextRoot
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: this.props.css.buttonContainer },
-	            _react2.default.createElement(
-	              _button2.default,
-	              { cssRootClass: css.signupButtonRoot, onClick: this.onSubmitForm },
-	              'Sign up'
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	}); /**
-	     * Created by AntonioGiordano on 19/07/16.
-	     */
-
-	module.exports = Registration;
-
-/***/ },
-/* 231 */
+/* 229 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"root":"registration__root___2I5c6","logo":"registration__logo___K-ILn","pageContent":"registration__pageContent___2Xu6m","formContainer":"registration__formContainer___1zm21","inputCont":"registration__inputCont___3krvN","inputTextRoot":"registration__inputTextRoot___nlpRQ","inputContainer":"registration__inputContainer___2yItM","signupButtonRoot":"registration__signupButtonRoot___3cwVu"};
+	module.exports = {"root":"login__root___2WK45","logo":"login__logo___1OrM0","pageContent":"login__pageContent___1br8M","formContainer":"login__formContainer___1LgFz","inputCont":"login__inputCont___2iSYM","inputTextRoot":"login__inputTextRoot___2hG3v","inputContainer":"login__inputContainer___2JLUm","signupButtonRoot":"login__signupButtonRoot___2AAzJ"};
 
 /***/ }
 ]);

@@ -1,0 +1,56 @@
+@import '../../global.scss';
+
+.root {
+  background: $darkBrandColor;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100vh;
+
+  .page {
+    width: 100%;
+    min-height: 100%;
+    min-height: 100vh;
+    @include display-flex();
+    @include browserify(flex-direction, column);
+    @include browserify(justify-content, flex-start);
+    @include browserify(align-items, center);
+
+    .headerContainer {
+      width: 100%;
+      height: $headerHeight;
+      background: darken($darkBrandColor, 5);
+    }
+
+    .pageBody {
+      @include display-flex();
+      @include browserify(justify-content, flex-start);
+      width: 100%;
+      min-height: calc(100vh - #{$headerHeight});
+
+      .sideMenu {
+        width: $sideMenuWidth;
+        min-height: calc(100vh - #{$headerHeight});
+        background: darken($darkBrandColor, 3);
+
+        ul {
+          li {
+            padding: 15px 10px;
+            border-bottom: 1px solid darken($darkBrandColor, 5);
+            color: $brandColor;
+            cursor: pointer;
+            text-transform: uppercase;
+
+            &:hover {
+              color: darken($darkBrandColor, 3);
+              background: $brandColor;
+              border-bottom: 1px solid darken($brandColor, 5);
+            }
+          }
+        }
+      }
+    }
+  }
+}
