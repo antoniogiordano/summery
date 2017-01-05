@@ -1,0 +1,60 @@
+@import "../../global.scss";
+
+.root {
+    @include display-flex();
+    justify-content: space-around;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    height: 100vh;
+    position: fixed;
+    background: transparentize($darkBrandColor, 0);
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    align-items: center;
+    svg {
+        width: 150px;
+        height: auto;
+    }
+}
+
+@keyframes firstRing {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    25% {
+        transform: translate(-10px, 6px);
+    }
+    75% {
+        transform: translate(7px, -3px);
+    }
+}
+
+@keyframes secondRing {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    25% {
+        transform: translate(10px, -6px);
+    }
+    75% {
+        transform: translate(-7px, 4px);
+    }
+}
+
+.layer {
+    animation: 2s linear infinite;
+}
+
+.firstRing {
+    animation-name: firstRing;
+}
+
+.secondRing {
+    animation-name: secondRing;
+}
+
+.thirdRing {
+    animation-name: thirdRing;
+}

@@ -4,7 +4,7 @@
   "description": "Summery is a WebApp tool for economics summary, graphs and automatic calculations",
   "main": "lib/server/server.js",
   "scripts": {
-    "develop": "babel src --out-dir lib -w",
+    "develop": "parallelshell 'babel src --out-dir lib -w' 'webpack -w' 'grunt'",
     "test": "standard --fix"
   },
   "repository": {
@@ -24,12 +24,51 @@
     "url": "https://github.com/antoniogiordano/summery/issues"
   },
   "homepage": "https://github.com/antoniogiordano/summery#readme",
+  "browser": {
+    "joi": "joi-browser"
+  },
   "devDependencies": {
+    "axios": "^0.15.3",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-2": "^6.17.0",
-    "standard": "^8.6.0"
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-develop": "^0.4.0",
+    "joi-browser": "^10.0.6",
+    "node-sass": "^4.1.1",
+    "parallelshell": "^2.0.0",
+    "postcss-loader": "^0.9.1",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "sass-loader": "^4.0.0",
+    "standard": "^8.6.0",
+    "style-loader": "^0.13.1",
+    "sweetalert": "^1.1.3",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "bcrypt": "^1.0.2",
+    "boom": "^4.2.0",
+    "ejs": "^2.5.5",
+    "hapi": "^16.1.0",
+    "hapi-auth-cookie-redis": "^1.2.0",
+    "hapi-mongodb": "^6.2.0",
+    "inert": "^4.1.0",
+    "joi": "^10.1.0",
+    "minimist": "^1.2.0",
+    "vision": "^4.1.1"
+  },
+  "standard": {
+    "ignore": [
+      "lib",
+      "public"
+    ]
   }
 }
